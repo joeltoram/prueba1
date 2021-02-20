@@ -1,0 +1,149 @@
+PROYECTO SISTEMA DE COLAS
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+namespace _SITEMA_DE_COLAS
+{
+    class Cola
+    {
+        
+        int[] vec;
+        int p, u, tam;
+
+        
+        public Cola(int n)
+        {
+            p = u = -1;
+            tam = n;
+            vec = new int[tam];
+        }
+
+        public bool esta_llena()
+        {
+            if (u >= tam - 1)
+                return true;
+            return false;
+        }
+
+        public bool esta_vacia()
+        {
+            if (p == -1)
+                return true;
+            return false;
+        }
+
+        public bool agregar(int dato)
+        {
+            if (!esta_llena())
+            {
+                vec[++u] = dato;
+                if (u == 0)
+                    p = 0;
+                return true;
+            }
+            return false;
+        }
+
+        public bool extraer(ref int dato)
+        {
+            
+            int var = 1;
+
+            
+            if (!esta_vacia())
+            {
+                
+                dato = vec[p];
+
+                for (int i = 0; i < vec.Length; i++)
+                {
+                    
+                    if (var < vec.Length)
+                    {
+                        
+                        vec[i] = vec[var];
+                        var++;
+                    }
+                }
+
+                
+                if (u == p)
+                {
+                    p = u = -1;
+                }
+                else
+                   
+                    u--;
+                return true;
+            }
+            return false;
+        }
+
+
+    }
+}
+
+
+
+
+PROYECTO DE MATRICES
+
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace PROYECTO1_P3
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int fila = 4;
+            int columna = 4;
+            int[,] matriz = { { 1, 1, 1, 1 },
+                              { 1, 1, 1, 1},
+                              { 1, 1, 0, 1},
+                              { 1, 1, 1, 1} };
+
+            int[,] matriz2 = new int[fila, columna];
+            int p1 = 0;
+            int p2 = 0;
+            for (int i = 0; i < fila; i++)
+            {
+                for (int j = 0; j < columna; j++)
+                {
+                    Console.Write(matriz[i, j] + " ");
+                    if (matriz[i, j] == 0)
+                    {
+                        p1 = i;
+                        p2 = j;
+                    }
+                }
+                Console.WriteLine();
+            }
+            Console.WriteLine();
+            for (int a = 0; a < fila; a++)
+            {
+                for (int b = 0; b < columna; b++)
+                {
+                    if (a == p1 || b == p2)
+                    {
+                        matriz2[a, b] = 0;
+                    }
+                    else
+                    {
+                        matriz2[a, b] = 1;
+                    }
+                    Console.Write(matriz2[a, b] + " ");
+                }
+                Console.WriteLine();
+            }
+            //Console.WriteLine(p1 + " " + p2);
+            Console.ReadLine();
+        }
+    }
+}
